@@ -1,4 +1,5 @@
 import 'package:coffee_break/services/auth.dart';
+import 'package:coffee_break/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -43,6 +44,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  decoration: inputDecoration.copyWith(hintText: "Email"),
                   validator: (val) =>
                       val.isEmpty ? "Enter an email address" : null,
                   onChanged: (val) {
@@ -51,6 +53,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  decoration: inputDecoration.copyWith(hintText: "Password"),
                   validator: (val) => val.length < 6
                       ? "Password should be at least 6 characters long"
                       : null,
