@@ -10,6 +10,8 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  String error = '';
   String email;
   String password;
   @override
@@ -31,15 +33,27 @@ class _SignInState extends State<SignIn> {
       body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
           child: Form(
+            key: _formKey,
             child: Column(
               children: <Widget>[
+                Text(
+                  error,
+                  style:
+                      TextStyle(color: Colors.redAccent[700], fontSize: 14.0),
+                ),
+                SizedBox(height: 20),
                 TextFormField(
+                  validator: (val) =>
+                      val.isEmpty ? "Enter an email address" : null,
                   onChanged: (val) {
                     setState(() => email = val);
                   },
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  validator: (val) => val.length < 6
+                      ? "Password should be at least 6 characters long"
+                      : null,
                   obscureText: true,
                   onChanged: (val) {
                     setState(() => password = val);
@@ -48,8 +62,14 @@ class _SignInState extends State<SignIn> {
                 SizedBox(height: 20),
                 RaisedButton(
                   onPressed: () async {
-                    print(email);
-                    print(password);
+                    if (_formKey.currentState.validate()) {
+                      dynamic result = await _auth.signInWithEmailAndPassword(
+                          email: email, password: password);
+
+                      if (result == null) {
+                        setState(() => error = "Invalid Email or Password");
+                      }
+                    }
                   },
                   color: Colors.brown[400],
                   child: Text(
