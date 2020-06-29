@@ -1,4 +1,5 @@
 import 'package:coffee_break/models/user.dart';
+import 'package:coffee_break/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -27,7 +28,7 @@ class AuthService {
   }
 
   // Sign In with email and password
-   Future signInWithEmailAndPassword({String email, String password}) async {
+  Future signInWithEmailAndPassword({String email, String password}) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -44,6 +45,10 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+      // create a user initial coffee data;
+      await DatabaseService(uid: user.uid)
+          .updateUserData(name: "new User", sugars: "1", strength: 100);
+          
       return createUser(user);
     } catch (e) {
       return null;
