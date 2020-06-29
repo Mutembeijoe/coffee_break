@@ -31,4 +31,7 @@ class AuthService {
   // Sign Up with email and password
 
   //sign out
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
 }
