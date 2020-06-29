@@ -11,6 +11,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  String error = '';
 
   // form fields
   String email;
@@ -34,9 +35,15 @@ class _RegisterState extends State<Register> {
       body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
           child: Form(
-            key:_formKey,
+            key: _formKey,
             child: Column(
               children: <Widget>[
+                Text(
+                  error,
+                  style:
+                      TextStyle(color: Colors.redAccent[700], fontSize: 14.0),
+                ),
+                SizedBox(height: 20),
                 TextFormField(
                   validator: (val) =>
                       val.isEmpty ? "Enter an email address" : null,
@@ -46,8 +53,9 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
-                  validator: (val) =>
-                      val.length < 6 ? "Password should be at least 6 characters long" : null,
+                  validator: (val) => val.length < 6
+                      ? "Password should be at least 6 characters long"
+                      : null,
                   obscureText: true,
                   onChanged: (val) {
                     setState(() => password = val);
@@ -57,8 +65,12 @@ class _RegisterState extends State<Register> {
                 RaisedButton(
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      print(email);
-                      print(password);
+                      dynamic result = await _auth.signUpWithEmailAndPassword(
+                          email: email, password: password);
+
+                      if (result == null) {
+                        setState(() => error = "Invalid Email");
+                      }
                     }
                   },
                   color: Colors.brown[400],
@@ -66,7 +78,7 @@ class _RegisterState extends State<Register> {
                     "Sign Up",
                     style: TextStyle(color: Colors.white),
                   ),
-                )
+                ),
               ],
             ),
           )),
