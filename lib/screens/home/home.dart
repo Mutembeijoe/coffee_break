@@ -9,6 +9,17 @@ class Home extends StatelessWidget {
   final _auth = AuthService();
   @override
   Widget build(BuildContext context) {
+    void _showSettingsPanel() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+              child: Text('Bottom Sheet'),
+            );
+          });
+    }
+
     return StreamProvider<List<Coffee>>.value(
       value: DatabaseService().coffees,
       child: Scaffold(
@@ -18,17 +29,29 @@ class Home extends StatelessWidget {
           title: Text("Home"),
           actions: <Widget>[
             FlatButton.icon(
-                onPressed: () async {
-                  _auth.signOut();
-                },
-                icon: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-                label: Text(
-                  "Sign Out",
-                  style: TextStyle(color: Colors.white),
-                ))
+              onPressed: () async {
+                _auth.signOut();
+              },
+              icon: Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+              label: Text(
+                "Sign Out",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            FlatButton.icon(
+              onPressed: () => _showSettingsPanel(),
+              icon: Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
+              label: Text(
+                "Settings",
+                style: TextStyle(color: Colors.white),
+              ),
+            )
           ],
         ),
         body: CoffeeList(),

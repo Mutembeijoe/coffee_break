@@ -19,7 +19,7 @@ class CoffeeTile extends StatelessWidget {
             backgroundColor: Colors.brown[coffee.strength],
           ),
           title: Text(coffee.name),
-          subtitle: Text('Takes ${coffee.sugars} sugars'),
+          subtitle: Text('Takes ${coffee.sugars} sugar(s)'),
         ),
       ),
     );
