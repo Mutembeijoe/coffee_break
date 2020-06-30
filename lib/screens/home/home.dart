@@ -1,5 +1,6 @@
 import 'package:coffee_break/models/coffee.dart';
 import 'package:coffee_break/screens/home/coffee_list.dart';
+import 'package:coffee_break/screens/home/settings_panel.dart';
 import 'package:coffee_break/services/auth.dart';
 import 'package:coffee_break/services/database.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class Home extends StatelessWidget {
           builder: (context) {
             return Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: Text('Bottom Sheet'),
+              child: Settings(),
             );
           });
     }
