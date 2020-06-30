@@ -15,11 +15,18 @@ class CoffeeTile extends StatelessWidget {
         child: ListTile(
           contentPadding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
           leading: CircleAvatar(
-            radius: 40.0,
+            radius: 30.0,
             backgroundColor: Colors.brown[coffee.strength],
+            backgroundImage: AssetImage('assets/coffee_icon.png'),
           ),
-          title: Text(coffee.name),
-          subtitle: Text('Takes ${coffee.sugars} sugar(s)'),
+          title: Text(
+            coffee.name,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            'Takes ${coffee.sugars} sugar(s)',
+            style: TextStyle(fontSize: 19),
+          ),
         ),
       ),
     );
