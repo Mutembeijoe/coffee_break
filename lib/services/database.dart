@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_break/models/coffee.dart';
+import 'package:coffee_break/models/user.dart';
 
 class DatabaseService {
   String uid;
@@ -19,7 +20,7 @@ class DatabaseService {
     });
   }
 
-// Create list of coffees
+// Create list of coffees from QuerySnapShot
   List<Coffee> _createCoffeeList(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Coffee(
@@ -29,9 +30,23 @@ class DatabaseService {
       );
     }).toList();
   }
+  // Create a UserData from Documen snapshot
+
+  UserData _createUserData(DocumentSnapshot snapshot) {
+    return UserData(
+        name: snapshot.data['name'] ?? '',
+        strength: snapshot.data['strength'] ?? 0,
+        sugars: snapshot.data['sugars'] ?? '0',
+        uid: uid);
+  }
 
 // Return Stream of coffees
   Stream<List<Coffee>> get coffees {
     return _coffeeCollection.snapshots().map(_createCoffeeList);
+  }
+
+// Stream of UserData
+  Stream<UserData> get userData {
+    return _coffeeCollection.document(uid).snapshots().map(_createUserData);
   }
 }
