@@ -1,18 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coffee_break/models/coffee.dart';
 import 'package:coffee_break/screens/home/coffee_list.dart';
 import 'package:coffee_break/services/auth.dart';
 import 'package:coffee_break/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   final _auth = AuthService();
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<QuerySnapshot>.value(
+    return StreamProvider<List<Coffee>>.value(
       value: DatabaseService().coffees,
       child: Scaffold(
+        backgroundColor: Colors.brown[50],
         appBar: AppBar(
           backgroundColor: Colors.brown[300],
           title: Text("Home"),

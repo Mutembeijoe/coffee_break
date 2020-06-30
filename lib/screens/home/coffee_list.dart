@@ -1,4 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coffee_break/models/coffee.dart';
+import 'package:coffee_break/screens/home/coffee_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,12 +11,12 @@ class CoffeeList extends StatefulWidget {
 class _CoffeeListState extends State<CoffeeList> {
   @override
   Widget build(BuildContext context) {
-    final coffees = Provider.of<QuerySnapshot>(context);
-    for(var coffee in coffees.documents){
-      print(coffee.data);
-    }
-    return Container(
-  
-    );
+    final coffees = Provider.of<List<Coffee>>(context);
+
+    return ListView.builder(
+        itemCount: coffees.length,
+        itemBuilder: (context, index) {
+          return CoffeeTile(coffees[index]);
+        });
   }
 }
