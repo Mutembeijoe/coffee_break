@@ -1,16 +1,26 @@
 # coffee_break
+A flutter project for coding buddies to enter their coffee preferences. This simple Application makes life easier for the one collecting the coffees, no more forgotten orders and everyone gets what they ordered. Everyone's happy!!
 
-A new Flutter project.
+## Tech Stack
 
-## Getting Started
+- ### [Flutter/Dart](https://flutter.dev)
+  coffee_break is built with Flutter. Flutter is a set of tooling that allows developers to create beautiful apps that run on iOS and Android. One Codebase!
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+- ### Firebase
+  This app utilises Google's Cloud firestore and firebase authentication system!
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Screenshots
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- ### Home Page
+
+
+<img src="https://res.cloudinary.com/myloxyloto/image/upload/v1593597213/mobile/coffee_break/coffee_break1_ig21xg.png" alt="Relics ER Diagram" />
+
+- ### Settings Panel 
+<img src="https://res.cloudinary.com/myloxyloto/image/upload/v1593597217/mobile/coffee_break/screen_2_k3hr6s.png" alt="Relics ER Diagram" />
+
+
+
+
+
